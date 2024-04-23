@@ -12,6 +12,7 @@ import Signup from "./pages/Signup.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
 import Landing from "./pages/Landing.jsx";
+import FourOhFour from './pages/FourOhFour.jsx';
 const router = createBrowserRouter([
   {
     path: "/home",
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
+    errorElement: <FourOhFour />
   },
   {
     path: "/forgot-password",
