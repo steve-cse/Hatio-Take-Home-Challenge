@@ -36,12 +36,13 @@ function Home() {
         }
     };
 
-    const handleCreateProject = async () => {
+    const handleCreateProject = async (e) => {
+        e.preventDefault()
         try {
             const { data, error } = await supabaseClient
                 .from('project')
                 .insert([{ title: newProjectTitle }])
-                .select()
+                .select() // insert and return data
             if (error) {
                 throw error;
             }
@@ -65,18 +66,18 @@ function Home() {
             <NavigationBar />
             <div className="container mt-4">
                 {error && <Alert variant="danger">{error}</Alert>}
-                <div className='d-flex align-items-center'>
+                <Form onSubmit={handleCreateProject} className='d-flex align-items-center'>
                     <Form.Group className='flex-grow-1'>
                         <Form.Control
                             type="text"
                             placeholder="Enter project title"
                             value={newProjectTitle}
                             onChange={(e) => setNewProjectTitle(e.target.value)}
-                            
+                            required
                         />
                     </Form.Group>
-                    <Button  style={{ margin: '0 8px' }} onClick={handleCreateProject}>Add Project</Button>
-                </div>
+                    <Button type="submit" style={{ margin: '0 8px' }}>Add Project</Button>
+                </Form>
                 <div className="row mt-4">
                     {projects.map(project => (
                         <div className="col-md-4 mb-4" key={project.id} onClick={() => handleProjectClick(project.id)}>
